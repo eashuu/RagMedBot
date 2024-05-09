@@ -3,35 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medical Chatbot</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
-        h1, h2, h3 {
-            color: #333;
-        }
-        h2 {
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 5px;
-        }
-        ul {
-            padding-left: 20px;
-        }
-        code {
-            background-color: #f4f4f4;
-            padding: 2px 5px;
-            border-radius: 3px;
-        }
-    </style>
 </head>
 <body>
 
@@ -52,9 +23,12 @@
   <h2>Requirements</h2>
     <p>To run this project, you need:</p>
     <ul>
-        <li>Python 3.x</li>
-        <li>PyTorch</li>
+        <li>Python 3.12</li>
+        <li>langchain</li>
+        <li>PyPDF</li>
+        <li>CTransformers and sentence-transformers</li>
         <li>Chainlit</li>
+        <li>faiss_cpu</li>
         <li>Other dependencies as specified in <code>requirements.txt</code></li>
     </ul>
     
@@ -64,41 +38,39 @@
         <pre><code>git clone https://github.com/your-username/medical-chatbot.git</code></pre>
         <li>Install dependencies:</li>
         <pre><code>pip install -r requirements.txt</code></pre>
+        <li>Install the quantized llama2 model from HuggingFace:
+        <pre><a href="https://huggingface.co/TheBloke/Llama-2-7B-GGML/blob/main/llama-2-7b.ggmlv3.q8_0.bin">https://huggingface.co/TheBloke/Llama-2-7B-GGML/blob/main/llama-2-7b.ggmlv3.q8_0.bin</a></pre></li>
     </ol>
 
   <h2>Usage</h2>
     <ol>
-        <li>Run the chatbot:</li>
-        <pre><code>python chatbot.py</code></pre>
-        <li>Follow the instructions to interact with the chatbot.</li>
-        <li>Input your medical queries and receive accurate responses.</li>
+        <li>Run the ingest.py file to create vectorstores:</li>
+        <pre><code>python ingest.py</code></pre>
+        <li>Now run the chatbot model:.</li>
+        <pre><code>chainlit run model.py</code></pre>
+        <li>Input your medical queries and receive accurate responses.<br>
+        Note:This model has been built solely for the purpose of clinical question and answering thus it cannot answer questions irrelevant to medical queries</li>
     </ol>
 
   <h2>File Structure</h2>
     <ul>
-        <li><code>chatbot.py</code>: Main script to run the chatbot.</li>
-        <li><code>model.py</code>: Contains the definition of the quantized Llama2 model.</li>
-        <li><code>utils.py</code>: Utility functions for data preprocessing and inference.</li>
+        <li><code>model.py</code>: Main script to run the chatbot.</li>
+        <li><code>ingest.py</code>: Script for ingesting data into vectorstores.</li>
+        <li><code>vectorstores/</code>: Directory containing vector stores for efficient storage and retrieval of embeddings.</li>
         <li><code>data/</code>: Directory containing the medical PDF dataset.</li>
         <li><code>requirements.txt</code>: List of Python dependencies.</li>
     </ul>
 
    <h2>Acknowledgements</h2>
     <ul>
-        <li><a href="https://github.com/llamalu/llama2">Llama2 Model</a></li>
+        <li><a href="https://huggingface.co/TheBloke/Llama-2-7B-GGML/blob/main/llama-2-7b.ggmlv3.q8_0.bin">Llama2-7b Model by TheBloke</a></li>
         <li><a href="https://github.com/chainlit/chainlit">Chainlit Library</a></li>
     </ul>
-
-   <h2>License</h2>
-    <p>This project is licensed under the MIT License - see the <a href="LICENSE">LICENSE</a> file for details.</p>
 
   <h2>Contributing</h2>
     <p>Contributions are welcome! Please feel free to submit pull requests.</p>
 
-  <h2>Authors</h2>
-    <ul>
-        <li><a href="https://github.com/your-username">Your Name</a></li>
-    </ul>
+  
 </div>
 
 </body>
